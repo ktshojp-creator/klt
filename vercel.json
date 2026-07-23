@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/((?!assets/|icon-|screenshot-|apple-touch-icon.png|manifest.json|sw.js).*项目*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!assets/|icon-|screenshot-|apple-touch-icon.png|manifest.json|sw.js).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

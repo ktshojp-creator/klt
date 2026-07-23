@@ -1,11 +1,125 @@
-<div align="center">
+# 韓国旅行 実践会話 (Korean Travel Practical Conversation)
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+シーン別にネイティブライクな対話形式で学べる、オフライン対応の韓国旅行会話フレーズ学習アプリケーション (PWA & Capacitor Hybrid)。
 
-  <h1>Built with AI Studio</h2>
+Vite 7 + React 19 + Tailwind CSS 4 の最新高速フレームワークで動作し、ブラウザ上でネイティブアプリに近い操作性と心地よいデザインを提供します。
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+---
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## 🎨 特徴 & 機能一覧
 
-</div>
+1. **シーン別対話学習 (Dialogue Stream)**
+   - 飲食店、ホテル、駅、観光地、緊急時の5つの重要シーン。
+   - 現地スタッフ（左側：ライトグレー）と自分（右側：グリーン）によるチャットバブル形式の美しいビジュアルレイアウト。
+   - 日本語訳、韓国語フレーズ、そして初心者でも発音しやすいように工夫された正確なカタカナルビを表示。
+
+2. **ネイティブTTS読み上げ (Text-to-Speech)**
+   - Web Speech APIを利用し、お好みのスピード（標準で少し聞き取りやすい0.85倍速に調整）で韓国語発音をネイティブ音声で読み上げます。
+   - 音声再生中の流れるようなインジケータ波形アニメーション。
+   - 会話を自動で順次再生・発音する「自動連続再生」機能。
+
+3. **リアルタイムフレーズ検索 (Fast Lookup)**
+   - すべての対話フレーズから、日本語・韓国語・カタカナルビをキーにインクリメンタル高速検索。
+   - シーン（カテゴリ）ごとのピルフィルタ搭載。
+
+4. **お気に入り登録機能 (Personal Bookmark)**
+   - 覚えておきたいフレーズをワンタップでハートマーク保存。
+   - オフライン時でも、自分だけの厳選フレーズ集としていつでも素早く確認・再生できます。
+   - デバイスの `localStorage` に自動で永続保存されます。
+
+5. **実践クイズモード (Quiz Arena)**
+   - 各シーン（または全シーンランダム）から5問を厳選出題。
+   - 日本語の問いに対し、4択の韓国語フレーズから正しい組み合わせを回答。
+   - 正解・不正解のインタラクティブな即時フィードバックと、自動音声発音による復習アシスト。
+   - 各シーン別の自己最高得点などの学習データを記録・表示。
+
+6. **法的保護ページの完全装備 (Legal Compliance)**
+   - プライバシーポリシー、利用規約、バージョン情報を完全完備。
+   - ユーザーデータの収集は一切なく、完全なローカル永続化（オフラインファースト・プライバシーファースト）を明記し、App Store や Google Play への申請要件をクリア。
+
+7. **モバイルファースト＆PWA (Offline Caching)**
+   - iPhoneや最新Androidに最適化されたタッチターゲット（44px以上を完全確保）と safe-area-inset 下部余白対応。
+   - Service Worker (`sw.js`) による静的リソースの強力なキャッシュ、オフラインでも完全稼働。
+   - 画面の「ホーム画面に追加」をタップすることで、スタンドアロンアプリ（PWA）としてインストール可能。
+
+---
+
+## 🛠️ 技術スタック
+
+- **Framework**: React 19 + TypeScript
+- **Bundler**: Vite 7
+- **Styling**: Tailwind CSS 4 (カスタムテーマ)
+- **Icons**: Lucide React
+- **Utility**: Native Web Speech API
+- **PWA Capabilities**: Service Worker Cache, manifest.json
+- **Native Wrap**: Capacitor Ready
+
+---
+
+## 📦 ファイル構成
+
+```
+/
+├── public/                 # PWA & 静的アセット
+│   ├── manifest.json       # PWA マニフェスト設定
+│   ├── sw.js               # オフラインキャッシュ用サービスワーカー
+│   ├── icon-192.png        # アプリランチャーアイコン
+│   ├── icon-512.png        # アプリランチャーアイコン (高解像度)
+│   └── apple-touch-icon.png
+├── src/
+│   ├── components/         # 再利用可能なモジュールコンポーネント
+│   │   ├── BottomNav.tsx   # 下部タブナビゲーション
+│   │   ├── SceneGrid.tsx   # シーン一覧グリッド
+│   │   ├── DialogueView.tsx# 対話学習チャットビュー
+│   │   ├── SearchPhrases.tsx# 全文検索・フィルタリング
+│   │   ├── FavoritesList.tsx# お気に入り保存リスト
+│   │   ├── QuizMode.tsx    # 4択クイズゲーム
+│   │   └── LegalPages.tsx  # プライバシーポリシー・規約
+│   ├── lib/
+│   │   ├── dialogueData.ts # すべての韓国語旅行会話データ定義
+│   │   └── tts.ts          // 音声合成発音ヘルパー
+│   ├── types.ts            # 共有TypeScript型定義
+│   ├── App.tsx             # メインアプリケーション(レイアウト、状態管理)
+│   ├── main.tsx            # エントリーポイント(サービスワーカー登録)
+│   └── index.css           # グローバルCSS (Tailwind 4)
+├── capacitor.config.ts     # Capacitor ネイティブビルド構成
+├── NATIVE_APP_GUIDE.md     # iOS/Androidネイティブ化のビルド手順書
+└── README.md               # 本書
+```
+
+---
+
+## 🚀 開発環境での実行方法
+
+ローカル開発環境でアプリケーションを立ち上げるには以下を実行します：
+
+```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動 (Vite)
+npm run dev
+```
+
+ブラウザで `http://localhost:3000` を開きます。
+
+---
+
+## 📱 PWA（ホーム画面への追加）のやり方
+
+当アプリはPWAに対応しており、ネイティブアプリのように端末に直接インストールできます。
+
+### iOS (Safari)
+1. SafariブラウザでデプロイされたアプリのURLを開きます。
+2. 下部ツールバーの「**共有ボタン（上矢印アイコン）**」をタップします。
+3. メニューを下にスクロールし、「**ホーム画面に追加**」を選択します。
+4. 右上の「追加」をタップすると、ホーム画面にアイコンが表示され、全画面（URLバー非表示）で起動可能になります。
+
+### Android (Chrome)
+1. ChromeブラウザでアプリのURLを開きます。
+2. 画面下部に表示される「**ホーム画面に韓国会話を追加**」バナーをタップするか、右上の「設定（縦の3点リーダー）」から「**アプリをインストール**」を選択します。
+3. 確認ダイアログで「インストール」を選択すると、ホーム画面に追加されます。
+
+---
+
+### 🇰🇷 Have a safe and happy trip to Korea! 즐거운 한국 여행 되세요!

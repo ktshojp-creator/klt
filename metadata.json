@@ -1,0 +1,6 @@
+{
+  "name": "韓国旅行 これだけ！会話集",
+  "description": "シーン別の対話で学ぶ韓国旅行会話フレーズ学習アプリ。オフライン対応、音声読み上げ、クイズ機能、お気に入り機能を搭載。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

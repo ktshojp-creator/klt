@@ -1,0 +1,38 @@
+{
+  "name": "韓国旅行 これだけ！会話集",
+  "short_name": "韓国旅行会話集",
+  "description": "「韓国旅行 これだけ! 会話集」は、日本人旅行者向けに必要最小限の実用フレーズだけを厳選した韓国語会話アプリです。空港、交通、ホテル、飲食店、買い物、観光、緊急時など12の主要シーンを網羅し、240以上のフレーズを日本語・韓国語・カタカナで確認できます。対話形式で学べるほか、日本語から韓国語を選ぶクイズで復習でき、検索機能で知りたい表現を即座に探せます。お気に入り登録やネイティブ音声にも対応し、初心者でも安心して使える設計です。旅行中のコミュニケーション、トラブル対応、事前学習まで幅広く活用でき、韓国旅行をより快適で充実したものにする心強いパートナーとなります。",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#faf8f5",
+  "theme_color": "#faf8f5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-narrow.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "シーン別対話学習画面"
+    },
+    {
+      "src": "/screenshot-wide.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "デスクトップ版学習ダッシュボード"
+    }
+  ]
+}
