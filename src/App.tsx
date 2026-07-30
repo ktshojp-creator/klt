@@ -45,6 +45,30 @@ export default function App() {
     }
   }, []);
 
+  // Handle Stripe Payment Redirect Verification
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const payment = params.get('payment');
+    const sessionId = params.get('session_id');
+
+    if (payment === 'success' && sessionId) {
+      fetch(`/api/verify-checkout-session?session_id=${sessionId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success || data.is_premium) {
+            handleToggleSupporter(true);
+            setShowSupporterModal(true);
+          }
+        })
+        .catch((err) => console.error('Failed to verify session:', err))
+        .finally(() => {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        });
+    } else if (payment === 'cancel') {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   // Track page views in Google Analytics when currentView changes
   useEffect(() => {
     let pageTitle = '韓国旅行会話集 - シーン一覧';
