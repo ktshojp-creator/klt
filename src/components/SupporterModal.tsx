@@ -130,7 +130,7 @@ export default function SupporterModal({ isOpen, onClose, isSupporter, onToggleS
     }
   };
 
-  // Handle Stripe Checkout
+  // Handle Stripe Checkout via Payment Link
   const handleStripeCheckout = async () => {
     if (!currentUser) {
       setErrorMsg('広告非表示版を購入するにはログインが必要です。');
@@ -141,19 +141,16 @@ export default function SupporterModal({ isOpen, onClose, isSupporter, onToggleS
     setErrorMsg(null);
 
     try {
-      const response = await fetch('/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid: currentUser.uid })
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || '決済URLの生成に失敗しました。');
+      const baseUrl = 'https://buy.stripe.com/8x2fZj1PXfgTbOAbey4gg00';
+      const checkoutUrl = new URL(baseUrl);
+      
+      // Pass logged-in User UID and Email to Stripe for tracking
+      checkoutUrl.searchParams.set('client_reference_id', currentUser.uid);
+      if (currentUser.email) {
+        checkoutUrl.searchParams.set('prefilled_email', currentUser.email);
       }
+
+      window.location.href = checkoutUrl.toString();
     } catch (err: any) {
       console.error('Stripe Checkout error:', err);
       setErrorMsg(err.message || '決済画面への遷移時にエラーが発生しました。');
