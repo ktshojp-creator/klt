@@ -53,9 +53,15 @@ export default function App() {
 
     if (payment === 'success' && sessionId) {
       fetch(`/api/verify-checkout-session?session_id=${sessionId}`)
-        .then((res) => res.json())
+        .then((res) => {
+          const contentType = res.headers.get('content-type');
+          if (res.ok && contentType && contentType.includes('application/json')) {
+            return res.json();
+          }
+          return null;
+        })
         .then((data) => {
-          if (data.success || data.is_premium) {
+          if (data && (data.success || data.is_premium)) {
             handleToggleSupporter(true);
             setShowSupporterModal(true);
           }
