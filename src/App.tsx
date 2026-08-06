@@ -13,6 +13,7 @@ import InterstitialAd from './components/InterstitialAd';
 import SupporterModal from './components/SupporterModal';
 import { Globe, RefreshCw, Heart } from 'lucide-react';
 import { trackPageView, trackEvent } from './lib/analytics';
+import { auth, db, onAuthStateChanged, doc, setDoc } from './lib/firebase';
 
 const LOCAL_STORAGE_KEY = 'korean_travel_learning_user_data_v1';
 
@@ -45,31 +46,27 @@ export default function App() {
     }
   }, []);
 
-  // Handle Stripe Payment Redirect Verification
+  // Handle Stripe Payment Redirect Verification (Frontend direct flow)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const payment = params.get('payment');
-    const sessionId = params.get('session_id');
 
-    if (payment === 'success' && sessionId) {
-      fetch(`/api/verify-checkout-session?session_id=${sessionId}`)
-        .then((res) => {
-          const contentType = res.headers.get('content-type');
-          if (res.ok && contentType && contentType.includes('application/json')) {
-            return res.json();
+    if (payment === 'success') {
+      handleToggleSupporter(true);
+      setShowSupporterModal(true);
+
+      if (auth && db) {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (user) {
+            const userRef = doc(db, 'users', user.uid);
+            setDoc(userRef, { is_premium: true, updatedAt: new Date().toISOString() }, { merge: true })
+              .catch((err) => console.error('Failed to update Firestore on payment success:', err));
           }
-          return null;
-        })
-        .then((data) => {
-          if (data && (data.success || data.is_premium)) {
-            handleToggleSupporter(true);
-            setShowSupporterModal(true);
-          }
-        })
-        .catch((err) => console.error('Failed to verify session:', err))
-        .finally(() => {
-          window.history.replaceState({}, document.title, window.location.pathname);
+          unsubscribe();
         });
+      }
+
+      window.history.replaceState({}, document.title, window.location.pathname);
     } else if (payment === 'cancel') {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
