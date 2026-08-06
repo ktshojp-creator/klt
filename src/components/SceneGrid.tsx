@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Scene } from '../types';
+import { INFEED_ADS } from '../data/affiliateAds';
+import A8AdCard from './A8AdCard';
 import * as Icons from 'lucide-react';
 
 interface SceneGridProps {
@@ -163,93 +165,27 @@ export default function SceneGrid({
               </motion.button>
             );
 
-            // If not supporter, inject an in-feed ad card at specified locations to keep it engaging and realistic
+            // If not supporter, inject an in-feed ad card at specified locations using A8.net config
             if (!isSupporter && scene.id === 'restaurant') {
               const adElement = (
-                <motion.div
+                <A8AdCard 
                   key="infeed-ad-gourmet"
-                  variants={itemVariants}
-                  className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-50/40 via-white to-rose-50/30 border border-blue-100/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden shadow-2xs"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2.5 bg-rose-500 text-white rounded-xl shrink-0 flex items-center justify-center">
-                      <Icons.Utensils className="w-5 h-5 animate-pulse" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="font-bold text-gray-800 text-sm">【ソウルグルメ】人気焼肉・伝統料理の日本語予約サービス</span>
-                        <span className="text-[9px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider scale-90">PR</span>
-                      </div>
-                      <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                        行列必至のサムギョプサルやタッカンマリの名店を現地からスマホ予約！今なら手数料無料クーポン付き。
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto justify-end">
-                    <button 
-                      onClick={() => onBecomeSupporter?.()} 
-                      className="text-[10px] text-gray-400 hover:text-rose-500 underline font-semibold cursor-pointer"
-                    >
-                      広告を消す
-                    </button>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        alert('これはデモ用のインフィード広告です。実際には提携先のグルメ予約サイトへ遷移します。');
-                      }}
-                      className="px-3.5 py-1.5 bg-gradient-to-r from-blue-500 to-rose-400 hover:from-blue-600 hover:to-rose-500 text-white text-xs font-bold rounded-lg shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>名店を予約</span>
-                      <Icons.ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                </motion.div>
+                  ad={INFEED_ADS.gourmet}
+                  category="gourmet"
+                  onBecomeSupporter={onBecomeSupporter}
+                />
               );
               return [cardElement, adElement];
             }
 
             if (!isSupporter && scene.id === 'beauty') {
               const adElement = (
-                <motion.div
+                <A8AdCard 
                   key="infeed-ad-beauty"
-                  variants={itemVariants}
-                  className="col-span-1 md:col-span-2 bg-gradient-to-r from-blue-50/40 via-white to-rose-50/30 border border-blue-100/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden shadow-2xs"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2.5 bg-rose-400 text-white rounded-xl shrink-0 flex items-center justify-center">
-                      <Icons.Sparkles className="w-5 h-5 animate-pulse" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="font-bold text-gray-800 text-sm">【K-Beauty】ソウル話題の美容皮膚科・厳選サロン予約</span>
-                        <span className="text-[9px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider scale-90">PR</span>
-                      </div>
-                      <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                        日本語通訳同行プランで安心の肌管理（ピーリング・ポテンツァ等）。新規予約で特別10%OFF！
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto justify-end">
-                    <button 
-                      onClick={() => onBecomeSupporter?.()} 
-                      className="text-[10px] text-gray-400 hover:text-rose-500 underline font-semibold cursor-pointer"
-                    >
-                      広告を消す
-                    </button>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        alert('これはデモ用のインフィード広告です。実際には提携先のビューティー予約サイトへ遷移します。');
-                      }}
-                      className="px-3.5 py-1.5 bg-gradient-to-r from-blue-500 to-rose-400 hover:from-blue-600 hover:to-rose-500 text-white text-xs font-bold rounded-lg shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>サロンを探す</span>
-                      <Icons.ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                </motion.div>
+                  ad={INFEED_ADS.beauty}
+                  category="beauty"
+                  onBecomeSupporter={onBecomeSupporter}
+                />
               );
               return [cardElement, adElement];
             }
