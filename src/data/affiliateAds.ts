@@ -16,19 +16,12 @@ export interface AffiliateAd {
 }
 
 export const INFEED_ADS: Record<string, AffiliateAd> = {
-  // グルメシーン用のインフィード広告
+  // グルメシーン用のインフィード広告 (A8.net バナーHTMLタグ使用)
   gourmet: {
     id: 'gourmet',
-    title: '【ソウルグルメ】人気焼肉・伝統料理の日本語予約',
-    description: '行列必至のサムギョプサルやタッカンマリの名店を現地からスマホ予約！今ならお得なクーポン付き。',
-    ctaText: '名店を予約',
-    linkUrl: 'https://px.a8.net/svt/ejp?a8mat=YOUR_A8_MAT_ID', // A8.netのリンクURL
-    // A8.netからコピーした「広告コード(HTML)」をそのまま使用したい場合は以下のコメントを外して貼り付けてください:
-    /*
-    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=XXXXX" rel="nofollow" target="_blank">
-      <img border="0" width="300" height="250" alt="" src="https://www17.a8.net/0.gif?a8mat=XXXXX"></a>
-      <img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=XXXXX" alt="">`,
-    */
+    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4B9YLG+2P1PXE+5TBA+5YZ75" rel="nofollow" target="_blank">
+<img border="0" width="300" height="250" alt="" src="https://www22.a8.net/svt/bgt?aid=260805220163&wid=003&eno=01&mid=s00000027127001003000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4B9YLG+2P1PXE+5TBA+5YZ75" alt="">`,
   },
 
   // 美容シーン用のインフィード広告
