@@ -35,6 +35,13 @@ export default function A8AdCard({ ad, category, onBecomeSupporter }: A8AdCardPr
           )}
         </div>
 
+        {/* 1行キャッチコピー（catchphrase または title の設定がある場合に表示） */}
+        {(ad.catchphrase || ad.title) && (
+          <p className="w-full text-center text-xs font-bold text-gray-800 my-1 truncate px-2">
+            {ad.catchphrase || ad.title}
+          </p>
+        )}
+
         {/* A8.net HTMLタグの埋め込み */}
         <div
           className="a8-ad-container flex items-center justify-center my-1 overflow-x-auto max-w-full"
