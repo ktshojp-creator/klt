@@ -6,6 +6,9 @@ export interface AffiliateAd {
   // A8.netから取得した「素材（HTMLコード）」をそのまま貼る場合は htmlCode に設定してください
   htmlCode?: string;
 
+  // バナーの上に表示する1行キャッチコピー
+  catchphrase?: string;
+
   // カード型デザイン（アプリの見た目に合わせる場合）で指定したい場合の項目
   title?: string;
   description?: string;
@@ -19,17 +22,55 @@ export const INFEED_ADS: Record<string, AffiliateAd> = {
   // グルメシーン用のインフィード広告 (A8.net バナーHTMLタグ使用)
   gourmet: {
     id: 'gourmet',
+    catchphrase: '【安定性抜群】安いけれど品質も安心！格安海外eSIM',
     htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4B9YLG+2P1PXE+5TBA+5YZ75" rel="nofollow" target="_blank">
 <img border="0" width="300" height="250" alt="" src="https://www22.a8.net/svt/bgt?aid=260805220163&wid=003&eno=01&mid=s00000027127001003000&mc=1"></a>
 <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4B9YLG+2P1PXE+5TBA+5YZ75" alt="">`,
   },
 
-  // 美容シーン用のインフィード広告
+  // 美容シーン用のインフィード広告 (A8.net バナーHTMLタグ使用)
   beauty: {
     id: 'beauty',
-    title: '【K-Beauty】ソウル話題の美容皮膚科・サロン予約',
-    description: '日本語通訳同行で安心の肌管理（ピーリング・ポテンツァ等）。特別割引きクーポン配布中！',
-    ctaText: 'サロンを探す',
-    linkUrl: 'https://px.a8.net/svt/ejp?a8mat=YOUR_A8_MAT_ID',
+    catchphrase: '【超軽量設計】機内持ち込み対応～大容量モデルまで。USB充電機能も◎',
+    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4B9YLG+2Q8L4Y+5VYU+5ZMCH" rel="nofollow">
+<img border="0" width="300" height="250" alt="" src="https://www23.a8.net/svt/bgt?aid=260805220165&wid=003&eno=01&mid=s00000027471001006000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=4B9YLG+2Q8L4Y+5VYU+5ZMCH" alt="">`,
+  },
+
+  // クイズページ用インフィード広告 1 (A8.net バナーHTMLタグ使用)
+  quiz1: {
+    id: 'quiz1',
+    catchphrase: '【おすすめ】たまにしか使わない…スーツケースはレンタルする時代',
+    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4B9YLG+2XDSEA+3J30+5ZMCH" rel="nofollow">
+<img border="0" width="300" height="250" alt="" src="https://www21.a8.net/svt/bgt?aid=260805220177&wid=003&eno=01&mid=s00000016470001006000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=4B9YLG+2XDSEA+3J30+5ZMCH" alt="">`,
+  },
+
+  // クイズページ用インフィード広告 2 (A8.net バナーHTMLタグ使用)
+  quiz2: {
+    id: 'quiz2',
+    catchphrase: '【よりお得に】現地ツアーやアクティビティならここ！',
+    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4BA0XB+45FV5U+52F8+5ZMCH" rel="nofollow">
+<img border="0" width="300" height="250" alt="" src="https://www24.a8.net/svt/bgt?aid=260808239251&wid=003&eno=01&mid=s00000023642001006000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=4BA0XB+45FV5U+52F8+5ZMCH" alt="">`,
+  },
+
+  // クイズページ用インフィード広告 3 (A8.net バナーHTMLタグ使用)
+  quiz3: {
+    id: 'quiz3',
+    catchphrase: '【お得なeSIM】最新情報を検索しながらの旅行中にも安心',
+    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4B9YLG+2VLHKY+5L2C+5YZ75" rel="nofollow">
+<img border="0" width="300" height="250" alt="" src="https://www21.a8.net/svt/bgt?aid=260805220174&wid=003&eno=01&mid=s00000026058001003000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=4B9YLG+2VLHKY+5L2C+5YZ75" alt="">`,
+  },
+
+  // クイズページ用インフィード広告 4 (A8.net バナーHTMLタグ使用)
+  quiz4: {
+    id: 'quiz4',
+    catchphrase: '【韓国旅行】日本語対応の厳選エステ＆体験予約',
+    htmlCode: `<a href="https://px.a8.net/svt/ejp?a8mat=4B9YLG+2XZ802+4X1W+5ZMCH" rel="nofollow">
+<img border="0" width="300" height="250" alt="" src="https://www26.a8.net/svt/bgt?aid=260805220178&wid=003&eno=01&mid=s00000022946001006000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=4B9YLG+2XZ802+4X1W+5ZMCH" alt="">`,
   },
 };
+
