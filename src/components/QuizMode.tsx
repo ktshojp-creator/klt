@@ -241,7 +241,7 @@ export default function QuizMode({
 
               let adCardToInsert = null;
               if (!isSupporter) {
-                if (idx === 0 && INFEED_ADS.quiz1) {
+                if (scene.id === 'transport' && INFEED_ADS.quiz1) {
                   adCardToInsert = (
                     <A8AdCard
                       key="quiz-ad-1"
@@ -250,7 +250,7 @@ export default function QuizMode({
                       onBecomeSupporter={onBecomeSupporter}
                     />
                   );
-                } else if (idx === 1 && INFEED_ADS.quiz2) {
+                } else if (scene.id === 'shopping' && INFEED_ADS.quiz2) {
                   adCardToInsert = (
                     <A8AdCard
                       key="quiz-ad-2"
@@ -259,7 +259,7 @@ export default function QuizMode({
                       onBecomeSupporter={onBecomeSupporter}
                     />
                   );
-                } else if (idx === 3 && INFEED_ADS.quiz3) {
+                } else if (scene.id === 'beauty' && INFEED_ADS.quiz3) {
                   adCardToInsert = (
                     <A8AdCard
                       key="quiz-ad-3"
@@ -268,7 +268,7 @@ export default function QuizMode({
                       onBecomeSupporter={onBecomeSupporter}
                     />
                   );
-                } else if (idx === 5 && INFEED_ADS.quiz4) {
+                } else if (scene.id === 'trouble' && INFEED_ADS.quiz4) {
                   adCardToInsert = (
                     <A8AdCard
                       key="quiz-ad-4"
