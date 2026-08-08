@@ -4,6 +4,8 @@ import { Scene, Dialogue } from '../types';
 import { HelpCircle, ChevronRight, CheckCircle2, XCircle, RotateCcw, Volume2, Trophy, BarChart2, Sparkles, Utensils } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import { speakKorean } from '../lib/tts';
+import { INFEED_ADS } from '../data/affiliateAds';
+import A8AdCard from './A8AdCard';
 
 interface QuizModeProps {
   scenes: Scene[];
@@ -237,93 +239,48 @@ export default function QuizMode({
                 </button>
               );
 
-              if (!isSupporter && scene.id === 'restaurant') {
-                const adElement = (
-                  <div
-                    key="quiz-ad-gourmet"
-                    className="w-full bg-gradient-to-r from-blue-50/40 via-white to-rose-50/30 border border-blue-100/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden shadow-2xs"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="p-2.5 bg-rose-500 text-white rounded-xl shrink-0 flex items-center justify-center">
-                        <Utensils className="w-4 h-4 animate-pulse" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="font-bold text-gray-800 text-xs">【ソウルグルメ】人気焼肉・伝統料理の日本語予約サービス</span>
-                          <span className="text-[9px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider scale-90">PR</span>
-                        </div>
-                        <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">
-                          行列必至のサムギョプサルやタッカンマリの名店を現地からスマホ予約！今なら手数料無料。
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto justify-end">
-                      <button 
-                        onClick={() => onBecomeSupporter?.()} 
-                        className="text-[10px] text-gray-400 hover:text-rose-500 underline font-semibold cursor-pointer"
-                      >
-                        広告を消す
-                      </button>
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          alert('これはデモ用のインフィード広告です。実際には提携先のグルメ予約サイトへ遷移します。');
-                        }}
-                        className="px-3 py-1 bg-gradient-to-r from-blue-500 to-rose-400 hover:from-blue-600 hover:to-rose-500 text-white text-[11px] font-bold rounded-lg shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>予約する</span>
-                      </a>
-                    </div>
-                  </div>
-                );
-                return [buttonElement, adElement];
+              let adCardToInsert = null;
+              if (!isSupporter) {
+                if (idx === 0 && INFEED_ADS.quiz1) {
+                  adCardToInsert = (
+                    <A8AdCard
+                      key="quiz-ad-1"
+                      ad={INFEED_ADS.quiz1}
+                      category="quiz1"
+                      onBecomeSupporter={onBecomeSupporter}
+                    />
+                  );
+                } else if (idx === 1 && INFEED_ADS.quiz2) {
+                  adCardToInsert = (
+                    <A8AdCard
+                      key="quiz-ad-2"
+                      ad={INFEED_ADS.quiz2}
+                      category="quiz2"
+                      onBecomeSupporter={onBecomeSupporter}
+                    />
+                  );
+                } else if (idx === 3 && INFEED_ADS.quiz3) {
+                  adCardToInsert = (
+                    <A8AdCard
+                      key="quiz-ad-3"
+                      ad={INFEED_ADS.quiz3}
+                      category="quiz3"
+                      onBecomeSupporter={onBecomeSupporter}
+                    />
+                  );
+                } else if (idx === 5 && INFEED_ADS.quiz4) {
+                  adCardToInsert = (
+                    <A8AdCard
+                      key="quiz-ad-4"
+                      ad={INFEED_ADS.quiz4}
+                      category="quiz4"
+                      onBecomeSupporter={onBecomeSupporter}
+                    />
+                  );
+                }
               }
 
-              if (!isSupporter && scene.id === 'beauty') {
-                const adElement = (
-                  <div
-                    key="quiz-ad-beauty"
-                    className="w-full bg-gradient-to-r from-blue-50/40 via-white to-rose-50/30 border border-blue-100/40 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden shadow-2xs"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="p-2.5 bg-rose-400 text-white rounded-xl shrink-0 flex items-center justify-center">
-                        <Sparkles className="w-4 h-4 animate-pulse" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="font-bold text-gray-800 text-xs">【K-Beauty】ソウル話題の美容皮膚科・厳選サロン予約</span>
-                          <span className="text-[9px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider scale-90">PR</span>
-                        </div>
-                        <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">
-                          日本語通訳同行プランで安心の肌管理（ピーリング等）。新規予約で特別10%OFF！
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto justify-end">
-                      <button 
-                        onClick={() => onBecomeSupporter?.()} 
-                        className="text-[10px] text-gray-400 hover:text-rose-500 underline font-semibold cursor-pointer"
-                      >
-                        広告を消す
-                      </button>
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          alert('これはデモ用のインフィード広告です。実際には提携先のビューティー予約サイトへ遷移します。');
-                        }}
-                        className="px-3 py-1 bg-gradient-to-r from-blue-500 to-rose-400 hover:from-blue-600 hover:to-rose-500 text-white text-[11px] font-bold rounded-lg shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>探す</span>
-                      </a>
-                    </div>
-                  </div>
-                );
-                return [buttonElement, adElement];
-              }
-
-              return [buttonElement];
+              return adCardToInsert ? [buttonElement, adCardToInsert] : [buttonElement];
             }).flat()}
           </div>
         </motion.div>
