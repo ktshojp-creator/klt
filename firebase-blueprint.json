@@ -1,0 +1,35 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and subscription status",
+      "type": "object",
+      "properties": {
+        "is_premium": {
+          "type": "boolean",
+          "description": "Whether the user has purchased the ad-free supporter version"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp or ISO date string"
+        },
+        "purchasedAt": {
+          "type": "string",
+          "description": "Purchase timestamp"
+        },
+        "stripeSessionId": {
+          "type": "string",
+          "description": "Stripe checkout session ID"
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "Stores individual user profile and ad-free supporter status"
+    }
+  }
+}

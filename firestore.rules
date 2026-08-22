@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Default deny all documents
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Users collection rules
+    match /users/{userId} {
+      // Allow user to read and update only their own document
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create, update: if isOwner(userId);
+      allow delete: if false;
+    }
+  }
+}
